@@ -205,6 +205,35 @@
     font-size: 0.875rem; color: var(--text2); line-height: 1.8;
   }
 
+  /* CASE STUDY */
+  .cs-block { margin-bottom: 4.5rem; }
+  .cs-step-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 1.75rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .cs-step-label::before {
+    content: ''; display: block; width: 28px; height: 1px; background: var(--gold);
+  }
+  .cs-figure { margin: 0; }
+  .cs-figure img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--border-mid);
+  }
+  figcaption, .cs-caption {
+    font-size: 0.85rem; color: var(--text2); line-height: 1.8;
+    margin-top: 1.25rem; max-width: 760px;
+  }
+  figcaption strong, .cs-caption strong { color: var(--text); font-weight: 500; }
+  .proof-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border); border: 1px solid var(--border);
+  }
+  .proof-grid img { width: 100%; height: auto; display: block; background: var(--bg); }
+  @media (max-width: 640px) {
+    .proof-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
   /* HOW I WORK */
   .approach-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -278,7 +307,7 @@
   <span class="nav-name">Nelson Nguyen</span>
   <div class="nav-links">
     <a href="#work">Work</a>
-    <a href="#tutorial">Tutorial</a>
+    <a href="#case-study">Case Study</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -357,53 +386,68 @@
 
 <hr class="divider">
 
-<!-- TUTORIAL -->
-<section id="tutorial">
-  <p class="section-label">Portfolio Piece</p>
-  <h2>AI Comic Composition<br><em>Framework</em></h2>
+<!-- CASE STUDY -->
+<section id="case-study">
+  <p class="section-label">Case Study</p>
+  <h2>The Character Consistency<br><em>Problem</em></h2>
+
+  <!-- 1. PROBLEM -->
   <p class="tutorial-intro">
-    A methodology for using AI image generation to produce compositionally intentional 
-    character art — applying rule of thirds, lighting logic, and camera angle theory 
-    to prompt design to achieve directed visual storytelling rather than random outputs.
+    AI image generation can't hold a character's appearance consistent from one
+    generation to the next — ask for the same person twice and you get two different
+    faces. That instability is the core technical challenge in AI comic and animation
+    production. Generating one good image is easy; maintaining a single, recognizable
+    character across a full narrative is the hard problem.
   </p>
 
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <img class="step-img" src="frame-01.png" alt="Medina character reference — clean three-quarter portrait on a neutral background">
-
-      <h4>Establish the Character Baseline</h4>
-      <p>Define the character's visual anchor — skin tone, key identifiers, 
-      costume elements, and proportion ratios. This becomes the consistency 
-      reference the LoRA model is trained to reproduce.</p>
-    </div>
-
-    <div class="step">
-      <div class="step-num">02</div>
-      <img class="step-img" src="frame-02.png" alt="Composition grid — the same moment framed at low, eye-level, and high camera angles">
-
-      <h4>Apply Compositional Logic to the Prompt</h4>
-      <p>Translate visual composition theory into prompt language — rule of thirds 
-      framing, camera angle (low-angle for power, high-angle for vulnerability), 
-      and lighting direction to direct the emotional read of the panel.</p>
-    </div>
-
-    <div class="step">
-      <div class="step-num">03</div>
-      <img class="step-img" src="frame-03.png" alt="Final output — Medina in motion, QA'd against the character reference">
-
-      <h4>QA Against the Reference Standard</h4>
-      <p>Generated output is reviewed against the canonical character reference 
-      and composition intent. Approved images enter the training dataset. 
-      Rejected outputs are analyzed for prompt adjustments before next generation.</p>
-    </div>
+  <!-- 2. THE PIPELINE -->
+  <div class="cs-block">
+    <p class="cs-step-label">The Pipeline</p>
+    <figure class="cs-figure">
+      <img src="workflow_screenshot.png" alt="Custom ComfyUI workflow — Load Checkpoint into a custom-trained character LoRA, CLIP text conditioning, and a KSampler resolving to the final image">
+      <figcaption>
+        <strong>A custom ComfyUI pipeline built to enforce character identity across generations.</strong>
+        A base checkpoint loads the model, a custom-trained character LoRA injects the
+        character's learned identity, CLIP conditioning steers the prompt, and the sampler
+        resolves it into the final image. The LoRA is the enforcement layer — it's what keeps
+        the same face, build, and design coming back generation after generation.
+      </figcaption>
+    </figure>
   </div>
 
+  <!-- 3. THE PROOF -->
+  <div class="cs-block">
+    <p class="cs-step-label">The Proof</p>
+    <figure class="cs-figure">
+      <img src="consistency-expressions.png" alt="Expression sheet — the same trained character rendered across eight distinct expressions, from neutral to combat intensity to vulnerable, holding a consistent face and identity throughout">
+      <figcaption>
+        <strong>The same character holding identity across eight distinct expressions.</strong>
+        Expression range is the hardest test of character consistency — changing the expression
+        is exactly where AI generation tends to break the face. Holding the same identity through
+        all eight is the proof the trained LoRA works.
+      </figcaption>
+    </figure>
+    <div class="proof-grid" style="margin-top: 2rem;">
+      <img src="consistency-01.png" alt="Trained character — three-quarter shot">
+      <img src="consistency-02.png" alt="Trained character — front primary shot">
+      <img src="consistency-03.png" alt="Trained character — cinematic hero shot">
+      <img src="consistency-04.png" alt="Trained character — full-body outfit shot">
+    </div>
+    <p class="cs-caption">
+      <strong>Secondary proof — consistency across pose and lighting.</strong>
+      The same character rendered across multiple shots from the trained LoRA — three-quarter,
+      front, cinematic, and full-body — holding consistent face, build, and design as pose,
+      framing, and lighting change.
+    </p>
+  </div>
+
+  <!-- 4. THE INSIGHT -->
   <div class="tutorial-note">
-    <strong style="color: var(--text);">What this demonstrates:</strong> The ability to bring 
-    compositional craft and directorial intent to AI image generation — moving beyond 
-    text-to-image prompting into directed visual production. The same pipeline logic 
-    applies to any character, brand, or creative IP.
+    <strong style="color: var(--text);">The insight:</strong> Stacking multiple conditioning
+    systems — FaceID + character LoRA + ControlNet — created competing signals that actually
+    degraded consistency instead of reinforcing it. Simplifying to clean, LoRA-driven generation
+    produced cleaner, more consistent output. The real lesson is production-first judgment:
+    build for what holds up in production, not for what demos well.
   </div>
 </section>
 
