@@ -193,6 +193,11 @@
     color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase;
   }
   .image-placeholder svg { opacity: 0.2; }
+  .step-img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--border-mid);
+    margin-bottom: 1.5rem;
+  }
   .tutorial-note {
     border-left: 2px solid var(--gold);
     padding: 1rem 1.5rem;
@@ -365,10 +370,8 @@
   <div class="steps">
     <div class="step">
       <div class="step-num">01</div>
-      <div class="image-placeholder">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Character Reference — Add Image</span>
-      </div>
+      <img class="step-img" src="frame-01.png" alt="Medina character reference — clean three-quarter portrait on a neutral background">
+
       <h4>Establish the Character Baseline</h4>
       <p>Define the character's visual anchor — skin tone, key identifiers, 
       costume elements, and proportion ratios. This becomes the consistency 
@@ -377,10 +380,8 @@
 
     <div class="step">
       <div class="step-num">02</div>
-      <div class="image-placeholder">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Composition Grid — Add Image</span>
-      </div>
+      <img class="step-img" src="frame-02.png" alt="Composition grid — the same moment framed at low, eye-level, and high camera angles">
+
       <h4>Apply Compositional Logic to the Prompt</h4>
       <p>Translate visual composition theory into prompt language — rule of thirds 
       framing, camera angle (low-angle for power, high-angle for vulnerability), 
@@ -389,10 +390,8 @@
 
     <div class="step">
       <div class="step-num">03</div>
-      <div class="image-placeholder">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-        <span>Final Output — Add Image</span>
-      </div>
+      <img class="step-img" src="frame-03.png" alt="Final output — Medina in motion, QA'd against the character reference">
+
       <h4>QA Against the Reference Standard</h4>
       <p>Generated output is reviewed against the canonical character reference 
       and composition intent. Approved images enter the training dataset. 
